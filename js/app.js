@@ -7,14 +7,13 @@ let row3 = false;
 function getRandomSpeed(min, max) {
     return Math.random() * (max - min) + min;
 }
-let bugSpeed = getRandomSpeed(40, 1000);
+
 
 var Enemy = function () {
     const firstRow = 60;
     const secondRow = 145;
     const thirdRow = 230;
-
-
+    
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     function getRandomXCoordinate(min, max) {
@@ -42,12 +41,13 @@ var Enemy = function () {
     }else{
         this.y = -300;
     }
-
+    
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function (dt) {
+    let bugSpeed = getRandomSpeed(40, 1000);
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -66,6 +66,8 @@ Enemy.prototype.render = function () {
 // a handleInput() method.
 var Player = function () {
     this.sprite = 'images/char-boy.png';
+    this.x = 200;
+    this.y = 380;
 }
 
 Player.prototype.update = function (dt) {
@@ -85,9 +87,13 @@ var firstEnemy = new Enemy();
 var secondEnemy = new Enemy();
 var thirdEnemy = new Enemy();
 var player = new Player();
+
+firstEnemy.update();
+
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 allEnemies = [firstEnemy, secondEnemy, thirdEnemy];
+
 
 
 // This listens for key presses and sends the keys to your
