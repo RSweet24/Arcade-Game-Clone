@@ -4,16 +4,11 @@ let row1 = false;
 let row2 = false;
 let row3 = false;
 
-function getRandomSpeed(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-
 var Enemy = function () {
     const firstRow = 60;
     const secondRow = 145;
     const thirdRow = 230;
-    
+
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     function getRandomXCoordinate(min, max) {
@@ -24,8 +19,14 @@ var Enemy = function () {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
+    function speed() {
+        return 100 + Math.floor(Math.random() * 512);
+    }
+
+
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
+    this.speed = speed();
     this.sprite = 'images/enemy-bug.png';
     this.x = getRandomXCoordinate(-110, -200);
     this.y = getRandomYCoordinate(1, 3);
@@ -35,25 +36,25 @@ var Enemy = function () {
     } else if (this.y === 2 && row2 === false) {
         this.y = secondRow;
         row2 = true;
-    } else if(this.y === 3 && row3 === false){
+    } else if (this.y === 3 && row3 === false) {
         this.y = thirdRow;
         row3 = true;
-    }else{
+    } else {
         this.y = -300;
     }
-    
+
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function (dt) {
-    let bugSpeed = getRandomSpeed(40, 1000);
+
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.x + bugSpeed * dt;
-    return this;
+    this.x += this.speed * dt;
 
+    
 };
 
 // Draw the enemy on the screen, required method for game
@@ -64,31 +65,31 @@ Enemy.prototype.render = function () {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function () {
+var Player = function (x, y, speed) {
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 380;
+    this.speed = speed;
 }
 
 Player.prototype.update = function (dt) {
-
+    
 }
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function () {
-
+Player.prototype.handleInput = function (keyPress) {
+    
 }
 
 // Now instantiate your objects.
 var firstEnemy = new Enemy();
 var secondEnemy = new Enemy();
 var thirdEnemy = new Enemy();
-var player = new Player();
+var player = new Player(200, 380, 50);
 
-firstEnemy.update();
 
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
