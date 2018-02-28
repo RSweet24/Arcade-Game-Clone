@@ -1,4 +1,4 @@
-#frontend-nanodegree-arcade-game
+frontend-nanodegree-arcade-game
 ===============================
 
 Welcome to the Frogger arcade game clone!! Hopefully you've played frogger before but if you have not below are some instructions on how to play and the point of the game.
